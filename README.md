@@ -1,17 +1,41 @@
-# Cine Paradiso — API
+# Cine Paradiso
 
-Trabajo final de la cátedra Lanzillotta.
+Aplicación web de cine con reservas, entradas con QR y administración de películas, funciones y salas.
 
-## Integrantes
+Trabajo final grupal de Introducción al Desarrollo de Software (FIUBA), cátedra Lanzillotta.
 
-- Gastón Roberti - 116174
-- Leandro Piccicacco - 116059
-- Cristian Nahuel Daglio - 116017
-- Juan Francisco Skanata - 116128
-- Alexis Martin Blazek - 115977
-- Lucía Hernández Tamagno 116281
-- Baltazar Marani - 115983
-- Agustín Perata - 115580
+**Tecnologías:** Python, Flask, MySQL, HTML, CSS, JWT, Docker, API de OMDb, Render y TiDB Cloud.
+
+**Organización:** GitHub Projects.
+
+## Demo online
+
+El hosting es gratuito, así que los servicios se "duermen" cuando no se usan. Para probar la demo, seguí este orden:
+
+1. Despertá la API: https://get-notas-api-ryi8.onrender.com/peliculas
+2. Esperá a que responda (puede tardar 60 segundos o más).
+3. Abrí la web: https://get-notas-web-zo6s.onrender.com
+
+## Mi aporte (Lucía Hernández Tamagno)
+
+- **Autenticación:** inicio y cierre de sesión con JWT y verificación de contraseñas con hash.
+- **Usuarios:** endpoints de registro, consulta y edición, sin exponer contraseñas en las respuestas.
+- **Backend:** control de acceso y manejo centralizado de errores.
+- **Estadísticas:** panel con indicadores y gráficos de ventas por género, franjas horarias y ocupación por sala.
+- **Interfaz:** diseño adaptable a celulares y tablets.
+- **Despliegue:** frontend y backend en Render, con base de datos en TiDB Cloud y conexión TLS.
+
+## Equipo
+
+Proyecto realizado por 8 integrantes:
+- Gastón Roberti
+- Leandro Piccicacco
+- Cristian Nahuel Daglio
+- Juan Francisco Skanata
+- Alexis Martin Blazek
+- Baltazar Marani
+- Agustín Perata
+- Lucía Hernández Tamagno
 
 ## Requisitos previos
 
@@ -422,11 +446,11 @@ Cada servicio necesita la URL del otro, así que seguí este orden:
 
 ### 8.5 Despliegue automático
 
-Cada push a la rama `<rama>` redespliega ambos servicios.
+Cada push a la rama `main` redespliega ambos servicios.
 
 ### 8.6 Limitaciones conocidas
 
-- **Arranque en frío:** en el plan gratuito, Render duerme los servicios tras un período sin tráfico. La primera petición puede tardar hasta 60 segundos.
+- **Arranque en frío:** en el plan gratuito, Render duerme los servicios tras un período sin tráfico. La primera petición puede tardar 60 segundos o más.
 - **Correo:** Render bloquea los puertos SMTP. Con `RENDER=true` la aplicación no envía mails; la reserva y los QR funcionan igual. El envío por correo solo funciona en local.
 - **Un solo worker:** Gunicorn corre con un worker y varios hilos, porque el backend ejecuta en segundo plano el job que expira las reservas pendientes. Con más workers se duplicaría.
 - **Seguridad:** nunca subas los `.env` ni claves al repositorio. Los secretos de producción se cargan solo en el panel de Render.
@@ -434,16 +458,11 @@ Cada push a la rama `<rama>` redespliega ambos servicios.
 ### 8.7 Alternar entre local y nube
 
 Los archivos `backend/.env.example` y `frontend/.env.example` traen dos bloques por variable: el activo es para localhost y el comentado, para la nube. Para pasar de uno a otro, comentá un bloque y descomentá el otro.
-## 8. Ingresar a la pagina (front)
+
+## 9. Ingresar a la pagina (front)
 Después de levantar todo (con el docker o el entorno virtual). 
 En su navegador, de preferencia, entrar al siguiente puerto: http://localhost:5000/
 Dónde se va a poder crear un usuario y registrarse
-## 9. Ingresar como administrador (front)
-Existen usuarios precargados con el rol de administrador ya configurados desde la base de datos un usuario para testiar las otras funciones es 
-{
-  "email": "admin@cineparadiso.com",
-  "contrasenia": "Admin1234"
-}
-## 10. pagina web (Host)
-Host de la pagina en Render
-https://get-notas-web-zo6s.onrender.com/
+
+## 10. Ingresar como administrador (front)
+La aplicación incluye un rol de administrador. Las credenciales no se publican por seguridad.
